@@ -1,5 +1,6 @@
 require 'redis'
 require 'json'
+require_relative 'snippet'
 
 class NetworkApplication
 
@@ -17,24 +18,19 @@ class NetworkApplication
     end
   end
 
-  def snippet(func)
+  def snippet(snippetName, func)
+    snippetName = snippetName
     snippetUsername = @user
     snippetCommand = func
     snippetHostnames = @hostnames
-    # @r.set("#{@snippetUsername}#{@snippetCommand}", ['snippetUsername', "#{@snippetUsername}"])
-    # @r.get("#{@snippetUsername}#{@snippetCommand}")
-    @r.set "#{snippetUsername}#{snippetCommand}", ["#{snippetUsername}", "#{snippetCommand}", "#{snippetHostnames}"].to_json
-    # @r.get("#{snippetUsername}#{snippetCommand}")
-    # JSON.parse(@r.get("#{snippetUsername}#{snippetCommand}")).each do |f|
-    #   # puts "username: #{f[0]}"
-    #   # puts "command: #{f[1]}"
-    #   # puts "hostnames: #{f[2]}"
-    #   puts f
-    # end
-    snippet = JSON.parse(@r.get("#{snippetUsername}#{snippetCommand}"))
-      puts "username: #{snippet[0]}"
-      puts "command: #{snippet[1]}"
-      puts "hostnames: #{snippet[2]}"
+    @r.set "#{snippetName}", ["#{snippetUsername}", "#{snippetCommand}", "#{snippetHostnames}"].to_json
+  end
+  
+  def get_snippet(snippetName)
+    snippet = JSON.parse(@r.get("#{snippetName}"))
+    @username = "username: #{snippet[0]}"
+    @command = "command: #{snippet[1]}"
+    @hostnames = "hostnames: #{snippet[2]}"
   end
 
   def create_snippet
@@ -46,3 +42,4 @@ class NetworkApplication
   end
 
 end
+
