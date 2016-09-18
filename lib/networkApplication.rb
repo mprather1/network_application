@@ -15,6 +15,11 @@ class NetworkApplication
     @snippet.load_snippet(name)
   end
   
+  def create_snippet(name, username, function, *hostnames)
+    @snippet = Snippet.new
+    @snippet.save_snippet(name, username, function, hostnames)
+  end
+  
   def run(name)
     find_snippet(name)
     @snippet.hostnames.each do |host|
