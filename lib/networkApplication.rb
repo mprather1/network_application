@@ -1,7 +1,7 @@
 require 'net/ssh'
 require_relative 'snippet'
 
-class NetworkApplication
+class NetworkApplication << Snippet
 
   attr_accessor :user, :snippet
 
@@ -9,6 +9,9 @@ class NetworkApplication
     @hostnames = []
     @user = user
   end
+  
+  def create snippet
+    
 
   def find_snippet(name)
     @snippet = Snippet.new
@@ -41,5 +44,5 @@ class NetworkApplication
       end
     end
   end
-
+  
 end
