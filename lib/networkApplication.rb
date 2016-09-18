@@ -1,7 +1,7 @@
 require 'net/ssh'
 require_relative 'snippet'
 
-class NetworkApplication << Snippet
+class NetworkApplication
 
   attr_accessor :user, :snippet
 
