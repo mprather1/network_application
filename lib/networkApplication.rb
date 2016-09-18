@@ -1,8 +1,9 @@
 require 'net/ssh'
+require_relative 'snippet'
 
 class NetworkApplication
 
-  attr_accessor :user
+  attr_accessor :user, :snippet
 
   def initialize
     @hostnames = []
@@ -37,6 +38,11 @@ class NetworkApplication
         ssh.loop
       end
     end
+  end
+  
+  def find_snippet(name)
+    @snippet = Snippet.new
+    @snippet.load_snippet(name)
   end
 
 end
