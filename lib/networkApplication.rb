@@ -22,24 +22,6 @@ class NetworkApplication
     end
   end
 
-  def run_function(func)
-    @hostnames.each do |host|
-      Net::SSH.start(host, @user) do |ssh|
-        hostname = ssh.exec! 'hostname'
-        puts "Executing #{func} on #{hostname}..."
-        ssh.open_channel do |channel|
-          channel.exec "#{func}" do |ch, success|
-            abort "could not execute command" unless success
-            channel.on_data do |ch, data|
-              puts "#{data}"
-            end
-          end
-        end
-        ssh.loop
-      end
-    end
-  end
-  
   def find_snippet(name)
     @snippet = Snippet.new
     @snippet.load_snippet(name)
@@ -48,7 +30,7 @@ class NetworkApplication
   def run(name)
     find_snippet(name)
     @snippet.hostnames.each do |host|
-      Net::SSH.start(host, @snippet.user) do |ssh|
+      Net::SSH.start(host, @snippet.username) do |ssh|
         hostname = ssh.exec! 'hostname'
         puts "Executing #{@snippet.function} on #{hostname}..."
         ssh.open_channel do |channel|
