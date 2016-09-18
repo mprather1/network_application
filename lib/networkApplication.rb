@@ -26,7 +26,7 @@ class NetworkApplication
     Net::SSH.start(host, username) do |ssh|
       hostname = ssh.exec! 'hostname'
       ssh.open_channel do |channel|
-        puts "Executing #{function} on #{hostname}..."
+        puts "\nExecuting #{function} on #{hostname}..."
         channel.exec function do |ch, success|
           abort "Error" unless success
           channel.on_data do |ch, data|
