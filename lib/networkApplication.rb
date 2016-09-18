@@ -10,9 +10,6 @@ class NetworkApplication
     @user = user
   end
   
-  def create snippet
-    
-
   def find_snippet(name)
     @snippet = Snippet.new
     @snippet.load_snippet(name)

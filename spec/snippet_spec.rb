@@ -26,7 +26,7 @@ describe 'Snippet' do
       function = "snippetFunction"
       hostnames = "snippetHostname1", "snippetHostname2"
       
-      snippet.create_snippet(name, username, function, hostnames)
+      snippet.save_snippet(name, username, function, hostnames)
       # snippet.load_snippet(name)
       expect(snippet.name).to eq(name)
       expect(snippet.username).to eq(username)

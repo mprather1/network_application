@@ -20,7 +20,7 @@ class Snippet
     puts @hostnames
   end
   
-  def create_snippet(name, username, function, *hostnames)
+  def save_snippet(name, username, function, *hostnames)
     @r.set(name, [name, username, function, hostnames].to_json)
     load_snippet(name)
   end
