@@ -1,6 +1,5 @@
-require_relative 'NetworkApplication'
+require_relative 'lib/networkApplication'
 
 n = NetworkApplication.new
-n.user = "mike"
-n.add_hostname "192.168.0.25", "192.168.0.7"
-n.run_function "sudo apt-get update"
+n.run("undtgradt")
+n.run("touch_desktop")
